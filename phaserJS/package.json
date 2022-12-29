@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "http-server -c-1 -p 8081"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "phaser": "^3.55.2"
+  }
+}
