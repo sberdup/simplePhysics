@@ -18,7 +18,8 @@
         type: Phaser.AUTO,
         width: 800,
         height: 600,
-        physics: {
+        physics: { 
+            // this is how physics is added to the game
             default: 'arcade',
             arcade: {
                 gravity: { y: 300 },
@@ -50,11 +51,13 @@
     function create ()
     {
         this.add.image(400, 300, 'sky');
-
+        // this.physics call requires setting up physics in config object
         platforms = this.physics.add.staticGroup();
-
+        // there are static and dynamic physics bodies
+        // this sets up a group of static ones that you can spin children off of
         platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-
+        // calling refreshBody() here is necessary because you scaled a STATIC entity
+        // so you need to tell the engine to look again
         platforms.create(600, 400, 'ground');
         platforms.create(50, 250, 'ground');
         platforms.create(750, 220, 'ground');

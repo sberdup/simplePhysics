@@ -37,8 +37,12 @@
     }
 
     function create ()
-    {
+    {//images added are centered by default
+    //  this.add.image(0, 0, 'sky').setOrigin(0, 0) 
+    //  ^^^ same effect vvv
         this.add.image(400, 300, 'sky');
+        //  images are layered in the order they are added within the create function
+        // a star should be placed below the sky declaration to show up
     }
 
     function update ()
