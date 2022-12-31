@@ -31,7 +31,7 @@
             update: update
         }
     };
-
+    // adding a player variable
     var player;
     var platforms;
 
@@ -51,7 +51,7 @@
         this.add.image(400, 300, 'sky');
 
         platforms = this.physics.add.staticGroup();
-
+        // this creation method defaults to a dynamic physics body
         platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
         platforms.create(600, 400, 'ground');
@@ -59,13 +59,14 @@
         platforms.create(750, 220, 'ground');
 
         player = this.physics.add.sprite(100, 450, 'dude');
-
+        // setting player behavior and physics
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
-
+        // setting animations for player
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            // using the first 4 frames on the spritesheet to go left
             frameRate: 10,
             repeat: -1
         });
@@ -73,12 +74,14 @@
         this.anims.create({
             key: 'turn',
             frames: [ { key: 'dude', frame: 4 } ],
+            // middle frame on spritesheet to face forward
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
             frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            // last 4 frames for right
             frameRate: 10,
             repeat: -1
         });

@@ -82,9 +82,10 @@
             frameRate: 10,
             repeat: -1
         });
-
+        // this one line adds a Collider object that checks for collision between the given entities
+        // will treat platforms as the collective physics group of all of them
         this.physics.add.collider(player, platforms);
-    }
+    }   // by default the function will keep them separate
 
     function update ()
     {

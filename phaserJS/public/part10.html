@@ -34,10 +34,12 @@ var config = {
 
 var player;
 var stars;
+// adding a hostile group
 var bombs;
 var platforms;
 var cursors;
 var score = 0;
+// adding a gamestate variable
 var gameOver = false;
 var scoreText;
 
@@ -122,18 +124,19 @@ function create ()
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(stars, platforms);
+    // collision check for bombs
     this.physics.add.collider(bombs, platforms);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(player, stars, collectStar, null, this);
-
+    // checks for bomb collision with player, calls that function
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
 
 function update ()
 {
     if (gameOver)
-    {
+    {   // disables input if the game is over
         return;
     }
 
@@ -169,16 +172,16 @@ function collectStar (player, star)
     //  Add and update the score
     score += 10;
     scoreText.setText('Score: ' + score);
-
+    // when all the on screen stars are collected, more stars and then bombs spawn in
     if (stars.countActive(true) === 0)
     {
         //  A new batch of stars to collect
         stars.children.iterate(function (child) {
-
+            // resets star position to drop them from the top again, thus "respawning" the stars
             child.enableBody(true, child.x, 0, true, true);
 
         });
-
+        // this makes sure the bombs are far enough away from the player on creation
         var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
         var bomb = bombs.create(x, 16, 'bomb');
@@ -191,13 +194,13 @@ function collectStar (player, star)
 }
 
 function hitBomb (player, bomb)
-{
+{   // stop the game
     this.physics.pause();
-
+    // player goes red
     player.setTint(0xff0000);
-
+    // player faces center
     player.anims.play('turn');
-
+    // set game over
     gameOver = true;
 }
 

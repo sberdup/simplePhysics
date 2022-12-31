@@ -33,6 +33,7 @@
     };
 
     var player;
+    // add new group for objectives
     var stars;
     var platforms;
     var cursors;
@@ -86,22 +87,24 @@
         });
 
         cursors = this.input.keyboard.createCursorKeys();
-
+        // adding a dynamic physics group
         stars = this.physics.add.group({
+            // this config object makes 12 stars total using that image and spaces them out
             key: 'star',
             repeat: 11,
             setXY: { x: 12, y: 0, stepX: 70 }
         });
 
         stars.children.iterate(function (child) {
-
+            // this gives each star a random bounce value
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
         });
 
         this.physics.add.collider(player, platforms);
+        // another collider is added for stars with platforms
         this.physics.add.collider(stars, platforms);
-
+        // a collider is added between player and stars with a function to run
         this.physics.add.overlap(player, stars, collectStar, null, this);
     }
 
@@ -133,7 +136,7 @@
     }
 
     function collectStar (player, star)
-    {
+    {   // upon collection, the star has physics and display disabled
         star.disableBody(true, true);
     }
 

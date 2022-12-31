@@ -36,7 +36,9 @@
     var stars;
     var platforms;
     var cursors;
+    // an variable to hold the score
     var score = 0;
+    // an object representing the displayed score
     var scoreText;
 
     var game = new Phaser.Game(config);
@@ -100,7 +102,7 @@
             child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
 
         });
-
+        // text for the score is set up in creation function
         scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
         this.physics.add.collider(player, platforms);
@@ -139,7 +141,7 @@
     function collectStar (player, star)
     {
         star.disableBody(true, true);
-
+        // now scoring is run after collecting a star
         score += 10;
         scoreText.setText('Score: ' + score);
     }
