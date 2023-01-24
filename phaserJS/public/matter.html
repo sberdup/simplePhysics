@@ -40,27 +40,17 @@
 
         function create() {
             this.matter.world.setBounds(0, 0, 800, 600, 32, true, true, false, true);
-            /*
-            const particle = Matter.Bodies.circle(
-                // initial particle position
-                Math.random() * sceneWidth,
-                Math.random() * sceneHeight,
 
-                particleSize, {
-                restitution: 1,
-                friction: 0,
-                frictionAir: 0
-            }
-            );
-
-            Matter.Body.setInertia(particle, Infinity);
-            */
             //  Add in a stack of balls
             for (var i = 0; i < 100; i++) {
-                var ball = this.matter.add.image(Phaser.Math.Between(100, 700), Phaser.Math.Between(-600, 0), 'ball');
+                var ball = this.matter.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 600), 'ball');
+                // Find a random direction, in radians
+                const direction = Math.random() * Math.PI * 2;
+                const ballSpeed = 5;
                 ball.setCircle();
-                ball.setFriction(0.005);
-                ball.setBounce(1);
+                ball.setFriction(0);
+                ball.setFrictionAir(0);
+                ball.setVelocity(Math.sin(direction) * ballSpeed, Math.cos(direction) * ballSpeed);
             }
         }
     </script>
