@@ -16,8 +16,14 @@
             physics: {
                 default: 'matter',
                 matter: {
-                    enableSleeping: true
-
+                    enableSleeping: true,
+                    gravity: {
+                        y: 0
+                    },
+                    debug: {
+                        showBody: true,
+                        showStaticBody: true
+                    }
                 }
             },
             scene: {
@@ -34,9 +40,22 @@
 
         function create() {
             this.matter.world.setBounds(0, 0, 800, 600, 32, true, true, false, true);
+            /*
+            const particle = Matter.Bodies.circle(
+                // initial particle position
+                Math.random() * sceneWidth,
+                Math.random() * sceneHeight,
 
+                particleSize, {
+                restitution: 1,
+                friction: 0,
+                frictionAir: 0
+            }
+            );
+
+            Matter.Body.setInertia(particle, Infinity);
+            */
             //  Add in a stack of balls
-
             for (var i = 0; i < 100; i++) {
                 var ball = this.matter.add.image(Phaser.Math.Between(100, 700), Phaser.Math.Between(-600, 0), 'ball');
                 ball.setCircle();
